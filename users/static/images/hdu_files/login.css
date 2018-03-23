@@ -1,0 +1,225 @@
+@charset "UTF-8";
+ul{
+    list-style: none;
+}
+.side-back{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 10;
+}
+.side-area{
+    position: fixed;
+    top: 0;
+    right: -225px;
+    width: 200px;
+    height: 100%;
+    background: white;
+    padding: 20px 12px 25px;
+    z-index: 11;
+}
+.side-btn{
+    width: 50px;
+    height: 65px;
+    position: absolute;
+    top: 100px;
+    left: -48px;
+    background: url(/asset/home/images/sidebtn.png);
+    cursor: pointer;
+	background-size: 50px 65px;
+}
+.side-weather{
+    height: 100px;
+    position: relative;
+    display: none
+}
+.side-weather>div{
+    font-size: 12px;
+    position: absolute;
+}
+.ssw{
+    top: 36px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+}
+.ssf{
+    background-color: #eeeeee;
+    height: 50px;
+    width: 1px;
+    top: 35px;
+    left: 75px;
+}
+.sst1{
+    top: 36px;
+    left: 87px;
+    color: #003b90;
+}
+.sst2{
+    top: 36px;
+    right: 20px;  
+    color: #003b90;
+}
+.sst3{
+    top: 64px;
+    left: 87px;
+    color: #a0a0a0
+}
+.sst4{
+    top: 64px;
+    right: 21px;
+    color: #a0a0a0
+}
+
+.side-time{
+    position: absolute;
+    bottom: 75px;
+    left: 12px;
+    height: 40px;
+    width: 200px;   
+}
+.side-time>div{
+    text-align: center;
+    font-size: 12px;
+    margin: 4px
+}
+.side-week{
+    color: #eb6100
+}
+.side-main{
+    height: 380px;
+    width: 200px;
+    position: absolute;
+    top: 380px;
+    margin-top: -190px;
+}
+
+@media screen and (max-height: 550px) {
+    .side-weather{
+        display: none
+    }
+}
+.side-title{
+    height: 60px;
+    border-bottom: 1px solid #b5b5b5;
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative
+}
+.side-m-login{
+    text-align: center;
+    margin: 8px 0 8px;
+}
+.side-m-login2{
+    text-align: center;
+    font-size: 12px;
+    color: #808080
+}
+.l-input{
+    height: 42px;
+    background: #f1f1f1;
+    margin-bottom: 12px;
+    border: 1px solid #e2e2e2;
+}
+.l-input input{
+    outline: none;
+    background: none;
+    margin-top: 10px;
+    width: 120px;
+    margin-left: 7px;
+    height: 20px;
+    border: none
+}
+.l-forget label{
+    font-size: 12px;
+    color: #959595;
+    cursor: pointer
+}
+.l-btn{
+    width: 125px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    padding: 10px 0;
+    background: #316abf;
+    margin: 20px auto 0;
+    text-align: center;   
+}
+.sn{
+    height: 35px;
+    display: block;
+    text-decoration: none;
+    color: #707070;
+    padding-top: 10px;
+    position: relative
+}
+.sn-border{
+     height: 1px;
+     margin: 9px auto 0;
+     background: #e9e9e9;
+     width: 180px;
+}
+.sn-icon{
+    float: left;
+    width: 30px;
+    height: 22px;
+    margin-left: 11px;
+    background: url(/asset/home/images/sideicon.png) no-repeat
+}
+.s-week{background-position: -9px -7px;}
+.sn:hover .s-week{background-position: -84px -7px; }
+.s-phone{background-position: -9px -69px;}
+.sn:hover .s-phone{background-position: -84px -69px; }
+
+.s-food{background-position: -9px -128px;}
+.sn:hover .s-food{background-position: -84px -128px; }
+.s-card{background-position: -9px -187px;}
+.sn:hover .s-card{background-position: -84px -187px; }
+.s-car{background-position: -9px -246px;}
+.sn:hover .s-car{background-position: -84px -246px; }
+
+
+
+.sn:hover{color: white;background: #316abf}
+
+.sn-name{
+    float: left;
+    width: 80px;
+    height: 22px;
+    margin-left: 15px;
+    padding-top: 4px
+}
+.sn-name2{
+    margin-left: 15px;
+}
+.sn-name3{
+    position: absolute;
+    top: 27px;
+    left: 56px;
+}
+.user-name,.user-small,.user-info{
+        position: absolute;
+}
+.user-name{
+    top: 0px;
+    left: 44px;
+    font-weight: bold;
+    font-size: 24px;
+}
+.user-small{
+    top: 8px;
+    left: 105px;
+    color: #003b90;
+    font-weight: bold
+}
+.user-info{
+    top: 34px;
+    left: 50px;
+    color: #959595;
+    font-size: 12px;
+}

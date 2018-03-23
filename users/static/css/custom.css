@@ -1,0 +1,104 @@
+.form {
+    padding: 6%;
+}
+
+.form-div {
+    width: 100%;
+}
+
+.form-content {
+    width: 72%;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+.form-content-a{
+    width: 20%;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+.form-div-button {
+    width: 100%;
+    padding: 12%;
+}
+
+.form-content-button {
+    width: 60%;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+
+.error {
+    color: crimson
+}
+
+.demo-layout-transparent {
+    background: url('/static/images/hdu_blur.jpg') center / cover;
+}
+
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+             your background is light. */
+    color: white;
+}
+
+.demo-card-wide.mdl-card {
+    width: 25%;
+    min-width: 300px;
+    min-height: 500px;
+    margin: auto;
+    position: absolute;
+    top: 15%;
+    left: 0;
+    right: 0;
+    bottom: 15%;
+
+}
+
+.demo-card-wide>.mdl-card__title {
+    color: #fff;
+    height: 176px;
+    min-height: 120px;
+    background: url('/static/images/hdu.jpg') center / cover;
+    /* background: rgb(53, 49, 49) center / cover; */
+}
+
+.demo-card-wide>.mdl-card__menu {
+    color: #fff;
+}
+
+.form {
+    padding: 6%;
+}
+
+.form-div {
+    width: 100%;
+}
+
+.form-content {
+    width: 72%;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+.form-div-button {
+    width: 100%;
+    padding: 12%;
+}
+
+.form-content-button {
+    width: 60%;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+.error {
+    color: crimson
+}

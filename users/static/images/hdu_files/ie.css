@@ -1,0 +1,362 @@
+.ff-content {
+    width: 1000px;
+    text-align: center;
+    margin: 0 auto;
+    height: 40px;
+}
+
+.ff-tab {
+    margin-right: 40px;
+    font-size: 14px;
+    color: #404040;
+    display: inline-block;
+    position: relative;
+    width: 56px;
+
+}
+
+.ff-tab a {
+    text-decoration: none;
+    color: #404040;
+}
+
+.ff-tab:hover {
+    color: #347ec4;
+}
+
+.ff-tab a:hover {
+    color: #347ec4;
+}
+
+.ff-show {
+    height: 40px;
+    line-height: 40px
+}
+
+.ff-show:hover {
+    color: #3b80c6;
+}
+
+.ff-manys {
+    height: 60px;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#C8ffffff, endColorstr=#C8ffffff); /*IE8支持*/
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    z-index: 10;
+    text-align: center;
+    display: none;
+    border-top: 2px solid #1993d1;
+}
+
+.ff-a-wrap {
+    display: inline-block;
+    padding-top: 10px;
+
+}
+
+.ff-a-wrap a {
+    float: left;
+    margin-right: 50px;
+    padding: 10px 0px 7px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #404040;
+}
+
+.ff-a-wrap a:hover {
+    color: #3b80c6;
+}
+
+.ff-tab i {
+    position: absolute;
+    top: 31px;
+    left: 23px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #003588;
+    border-bottom: 5px solid transparent;
+    transition: all .5s;
+}
+
+.ff-tab .ai {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    border-top: 5px solid #1993d1;
+}
+
+.side-back {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000, endColorstr=#7F000000); /*IE8支持*/
+}
+
+ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px
+}
+
+.hack {
+    margin-right: 0px;
+}
+
+.banner {
+    width: 1280px;
+    margin: 0 auto;
+
+    height: 524px;
+    box-shadow: 0px 5px 10px #888888;
+}
+
+.unslider {
+    /*    box-shadow: 0px 5px 10px #888888;*/
+}
+
+/*
+@media screen and (max-width: 1280px){
+    .banner{
+        width: 100%;
+        min-width: 1000px;
+
+    }
+}
+*/
+body {
+
+    background: url(/asset/home/images/bodyback.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+.h-active {
+    height: 290px;
+    /*box-shadow: 0px 7px 10px #888888;*/
+    padding-left: 140px;
+    padding-right: 140px;
+}
+
+.h-news, .h-active, .links-tabs {
+    background: white;
+}
+
+.links-tabs {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 25px;
+    padding-bottom: 16px;
+    box-shadow: 0px 7px 10px #888888;
+    padding-left: 140px;
+    padding-right: 140px
+}
+
+.lines {
+    background: white
+}
+
+.h-links {
+    margin-top: 0px;
+    padding-top: 5px;
+    box-shadow: 0px 8px 10px #888888;
+    padding-left: 140px;
+    padding-right: 140px;
+}
+
+.h-news {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    /*box-shadow: 0px 5px 10px #888888;*/
+    padding-left: 140px;
+    padding-right: 140px;
+}
+
+.link-border {
+    margin-bottom: 0
+}
+
+.n-right {
+    right: 8px;
+}
+
+.n-left {
+    left: 27px;
+}
+
+.links-body {
+    padding-top: 10px;
+    margin-top: 0;
+    background: white
+}
+
+.h-links {
+    background: white
+}
+
+.aicon, .aicon2, .aicon3 {
+    left: 10px
+}
+
+.block {
+    margin-left: 20px;
+}
+
+.h-active .hack {
+    margin-right: 5px;
+    margin-left: 20px;
+}
+
+.cur {
+    width: 105px
+}
+
+.tabs-check {
+    margin-left: 10px;
+}
+
+.item-area {
+    padding-left: 22px;
+    background: #f5f5f5;
+    padding-bottom: 10px;
+}
+
+.banner-tool {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+/*新添加的样式覆盖掉原来样式, 原来的不做修改*/
+
+.h-content-change {
+    width: 1280px;
+}
+
+.search {
+    background-color: #db4a33;
+    height: 30px;
+}
+
+.search input {
+    background: none;
+    border: none;
+    height: 30px;
+    color: white;
+}
+
+.search span {
+    float: left;
+    margin-top: 5px;
+    margin-right: 5px
+}
+
+.logo-bar {
+    background: #ffffff;
+}
+
+.navigation-bar {
+    background: #ffffff;
+}
+
+.check {
+    margin-top: 0;
+    width: 200px;
+}
+
+.check a {
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.check a:hover {
+    text-decoration: underline
+}
+
+.h-links {
+    padding-left: 0;
+    padding-right: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.links-tabs {
+    padding-left: 0;
+    padding-right: 0;
+    background: none;
+    box-shadow: none
+}
+
+.links-body {
+    background: none;
+    box-shadow: none
+}
+
+.h-news {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.h-active {
+    padding-left: 0;
+    padding-right: 0
+}
+
+.n-bg-img {
+    width: 1280px;
+    margin: 0 auto;
+    /*background: url(/asset/home/images/body-bg.png) no-repeat;*/
+    background-color: white;
+    box-shadow: 0px 5px 10px #888888;
+}
+
+.n-bg-filter {
+    width: 1000px;
+    margin: 0 auto;
+    background: #ffffff;
+    background: -webkit-linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.lines {
+    background: none
+}
+
+.item-area {
+    background: none
+}
+
+.item-area a {
+    color: black;
+}
+
+.t-name {
+    left: 130px;
+}
+
+.tabs-item .t-border {
+    color: #2c386c
+}
+
+.active .t-border {
+    color: white
+}
+
+body {
+    background: url(/asset/home/images/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.footer {
+    background: url(/asset/home/images/copyright.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
