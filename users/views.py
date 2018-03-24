@@ -20,7 +20,7 @@ def signin(request):
             username=request.POST['username'], password=request.POST['password'])
         if user is not None and user.is_active:
             login(request, user)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/edms/')
         else:
             context['message'] = '密码错误或用户未激活'
         context['username'] = request.POST['username']

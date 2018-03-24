@@ -4,7 +4,10 @@ from .models import *
 from django.http import HttpResponse,FileResponse,StreamingHttpResponse,JsonResponse
 # Create your views here.
 def edms(request):
-    return render(request,'edms/index.html')
+    user_id = request.user.username
+    user_name = request.user.teacher.name
+
+    return render(request,'edms/index.html',locals())
 
 
 def file_download(request):

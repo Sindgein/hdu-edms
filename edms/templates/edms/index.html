@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -30,7 +30,7 @@
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">{{ header }}</span>
+          <span class="mdl-layout-title">教学档案</span>
           <div class="mdl-layout-spacer"></div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
             <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
@@ -55,8 +55,8 @@
         <header class="demo-drawer-header">
           <!-- <img src="/static/images/user.jpg" class="demo-avatar"> -->
           <div class="demo-avatar-dropdown">
-            <span>张教授 </span>
-            <span>13062130</span>
+            <span>{{ user_name}}</span>
+            <span>{{ user_id }}</span>
             <div class="mdl-layout-spacer"></div>
             <!-- <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
               <i class="material-icons" role="presentation">arrow_drop_down</i>
@@ -92,7 +92,7 @@
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
-          <p>{{a}}</p>
+          <p>12432424</p>
 
 
 
@@ -111,7 +111,7 @@
   var app = new Vue({
     el: '#app',
     data: {
-      a: '教学档案',
+      titlename: '教学档案',
 
     },
     methods: {
