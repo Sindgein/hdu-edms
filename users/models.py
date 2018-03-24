@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+
+
 # 管理员，通过django admin后台注册，不开放注册入口
-
-
 class Admin(models.Model):
     user = models.OneToOneField(
         User, related_name='admin', on_delete=models.CASCADE)

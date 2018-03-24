@@ -4,7 +4,11 @@
         {% csrf_token %}
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-div">
             <input class="mdl-textfield__input form-content" value="{{ username }}" pattern="[A-Za-z0-9]*" type="text" name='username' id="_username">
-            <label class="mdl-textfield__label form-content" for="nickname">用户名</label>
+            <label class="mdl-textfield__label form-content" for="nickname">姓名</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-div">
+            <input class="mdl-textfield__input form-content" value="{{ teacher_id }}" pattern="[0-9]*" type="text" name='teacher_id' id="teacher_id">
+            <label class="mdl-textfield__label form-content" for="teacher_id">工号</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-div">
             <input class="mdl-textfield__input form-content" value="{{ email }}" type="email" name='email' id="email">
