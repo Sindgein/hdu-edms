@@ -1,7 +1,8 @@
 # -*- coding:utf-8 -*-
 from django.shortcuts import render
-from .models import *
 from django.http import HttpResponse, FileResponse, StreamingHttpResponse, JsonResponse
+from .models import *
+import json
 # Create your views here.
 
 
@@ -10,7 +11,7 @@ def edms(request):
         'user_id': request.user.username,
         'user_name': request.user.teacher.name
     }
-    return render(request, 'edms/index.html',context=content)
+    return render(request, 'edms/index.html', context=content)
 
 
 def file_download(request):
@@ -25,4 +26,10 @@ def file_download(request):
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="test.xlsx"'
     return response
-    # return JsonResponse('hello',safe=False)
+
+
+def get_teachfile(request):
+    teacher = request.user.teacher
+    file_set = teacher.course.all()
+    file_set_info = [file.file_info() for file in file_set]
+    return JsonResponse(file_set_info, safe=False)

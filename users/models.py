@@ -12,6 +12,9 @@ class Admin(models.Model):
         verbose_name = '管理员'
         verbose_name_plural = '管理员'
 
+    def __str__(self):
+        return u'%s' % self.username
+
 
 class Teacher(models.Model):
     user = models.OneToOneField(
@@ -23,22 +26,28 @@ class Teacher(models.Model):
         verbose_name = '老师'
         verbose_name_plural = '老师'
 
+    def __str__(self):
+        return u'%s' % self.name
+
 
 class Student(models.Model):
     user = models.OneToOneField(
         User, related_name='student', on_delete=models.CASCADE)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, blank=True)
     is_assitant = models.BooleanField(default=False, verbose_name='管理员助手')
     name = models.CharField(max_length=20, verbose_name='学生姓名')
     # student_id = models.IntegerField(verbose_name='学号')
 
-    _class = models.CharField(max_length=20, verbose_name='班级', null=True)
-    major = models.CharField(max_length=100, verbose_name='专业', null=True)
-    school = models.CharField(max_length=50, verbose_name='学院', null=True)
-    grades = models.CharField(max_length=100, verbose_name='题目', null=True)
+    _class = models.CharField(max_length=20, verbose_name='班级', blank=True)
+    major = models.CharField(max_length=100, verbose_name='专业', blank=True)
+    school = models.CharField(max_length=50, verbose_name='学院', blank=True)
+    grades = models.CharField(max_length=100, verbose_name='题目', blank=True)
     # teacher = models.CharField(max_length=20, verbose_name='指导老师')
     # socer = models.CharField(max_length=50, verbose_name='成绩')
 
     class Meta:
         verbose_name = '学生'
         verbose_name_plural = '学生'
+
+    def __str__(self):
+        return u'%s' % self.name

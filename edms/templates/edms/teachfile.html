@@ -1,0 +1,25 @@
+<div class="table">
+
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table ">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">学年</th>
+                <th>学期</th>
+                <th>课程名称</th>
+                <th>选课号</th>
+                <th>审核状态</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="f in teachfiles">
+                <td class="mdl-data-table__cell--non-numeric">[[f.year]]</td>
+                <td>[[f.term]]</td>
+                <td>[[f.course_name]]</td>
+                <td>[[f.course_id]]</td>
+                <td>[[f.auditing_opinion]]</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

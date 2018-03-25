@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
   <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/custom.css">
 </head>
 
 <body>
@@ -58,8 +59,8 @@
           <span>{{ user_id }}</span>
           <span>{{ user_id }}</span>
           <div class="demo-avatar-dropdown">
-            
-            
+
+
             <div class="mdl-layout-spacer"></div>
             <!-- <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
               <i class="material-icons" role="presentation">arrow_drop_down</i>
@@ -90,8 +91,9 @@
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
+          {% include './teachfile.html' %}
 
-   
+
 
 
 
@@ -103,25 +105,10 @@
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="/static/mdl/material.min.js"></script>
   <script src="/static/js/muse-ui.js"></script>
-
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="/static/js/edms-app.js"></script>
 
 </body>
-<script>
-  var app = new Vue({
-    delimiters:['[[', ']]'],
-    el: '#app',
-    data: {
-      header_title: '教学档案',
-      seen: true
-
-    },
-    methods: {
-      change_header_title(title) {
-        this.header_title = title
-      }
-    }
-  })
-</script>
 <style>
   #view-source {
     position: fixed;
