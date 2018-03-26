@@ -70,7 +70,10 @@ class TeachFiles(models.Model):
 
     def file_detail(self):
         detail = {}
-        index = self.teaching_syllabus.path.find('uploads')
+        try:
+            index = self.teaching_syllabus.path.find('uploads')
+        except:
+            pass
         if self.teaching_syllabus:
             detail['teaching_syllabus'] = {
                 'url': self.teaching_syllabus.path[index::]}
@@ -126,6 +129,7 @@ class TeachFiles(models.Model):
                 'url': self.auditing_opinion.path[index::]}
         else:
             detail['auditing_opinion'] = {'url': 'null'}
+
         return detail
 
 
