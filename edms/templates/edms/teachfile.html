@@ -1,25 +1,14 @@
-<div class="table">
-
-
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table ">
-        <thead>
-            <tr>
-                <th class="mdl-data-table__cell--non-numeric">学年</th>
-                <th>学期</th>
-                <th>课程名称</th>
-                <th>选课号</th>
-                <th>审核状态</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="f in teachfiles">
-                <td class="mdl-data-table__cell--non-numeric">[[f.year]]</td>
-                <td>[[f.term]]</td>
-                <td>[[f.course_name]]</td>
-                <td>[[f.course_id]]</td>
-                <td>[[f.auditing_opinion]]</td>
-            </tr>
-        </tbody>
-    </table>
+<div v-for="f in teachfiles" class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+    <div class="card-height mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+        <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+            <h2 class="mdl-card__title-text">[[f.course_name]]</h2>
+        </div>
+        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            [[f.year]]学年第[[f.term]]学期 <bt>
+            审核状态：[[f.auditing_opinion]]
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <a @click="read_more(f)" href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">查看详情</a>
+        </div>
+    </div>
 </div>

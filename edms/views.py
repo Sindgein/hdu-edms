@@ -28,8 +28,14 @@ def file_download(request):
     return response
 
 
-def get_teachfile(request):
+def get_teachfile_list(request):
     teacher = request.user.teacher
     file_set = teacher.course.all()
-    file_set_info = [file.file_info() for file in file_set]
+    file_set_info = [file.file_info_list() for file in file_set]
     return JsonResponse(file_set_info, safe=False)
+
+
+def get_teachfile(request, filename):
+    teacher = request.user.teacher
+    teachfile = teacher.course.get(course_id=filename)
+    return JsonResponse(teachfile.file_detail(), safe=False)

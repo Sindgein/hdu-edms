@@ -23,7 +23,7 @@ class TeachFiles(models.Model):
     student_score = models.FileField(
         verbose_name='学生成绩登记册', upload_to='uploads/TeachFiles/student_socre', blank=True)
     # 教学小结表
-    teanching_sum_up = models.FileField(
+    teaching_sum_up = models.FileField(
         verbose_name='教学小结表', upload_to='uploads/TeachFiles/teaching_sum_up', blank=True)
     # 正考试卷样卷
     exam_paper = models.FileField(
@@ -59,7 +59,7 @@ class TeachFiles(models.Model):
     def __str__(self):
         return u'%s' % self.course_name
 
-    def file_info(self):
+    def file_info_list(self):
         return {
             'year': self.year,
             'term': self.term,
@@ -68,7 +68,65 @@ class TeachFiles(models.Model):
             'auditing_opinion': self.auditing_opinion
         }
 
-# 毕业设计档案
+    def file_detail(self):
+        detail = {}
+        index = self.teaching_syllabus.path.find('uploads')
+        if self.teaching_syllabus:
+            detail['teaching_syllabus'] = {
+                'url': self.teaching_syllabus.path[index::]}
+        else:
+            detail['teaching_syllabus'] = {'url': 'null'}
+        if self.teaching_plan:
+            detail['teaching_plan'] = {'url': self.teaching_plan.path[index::]}
+        else:
+            detail['teaching_plan'] = {'url': 'null'}
+        if self.student_score:
+            detail['student_score'] = {'url': self.student_score.path[index::]}
+        else:
+            detail['student_score'] = {'url': 'null'}
+        if self.teaching_sum_up:
+            detail['teaching_sum_up'] = {
+                'url': self.teaching_sum_up.path[index::]}
+        else:
+            detail['teaching_sum_up'] = {'url': 'null'}
+        if self.exam_paper:
+            detail['exam_paper'] = {'url': self.exam_paper.path[index::]}
+        else:
+            detail['exam_paper'] = {'url': 'null'}
+        if self.exam_paper_answer:
+            detail['exam_paper_answer'] = {
+                'url': self.exam_paper_answer.path[index::]}
+        else:
+            detail['exam_paper_answer'] = {'url': 'null'}
+        if self.exam_paper_analyze:
+            detail['exam_paper_analyze'] = {
+                'url': self.exam_paper_analyze.path[index::]}
+        else:
+            detail['exam_paper_analyze'] = {'url': 'null'}
+        if self.exam_part:
+            detail['exam_part'] = {'url': self.exam_part.path[index::]}
+        else:
+            detail['exam_part'] = {'url': 'null'}
+        if self.exam_make_up:
+            detail['exam_make_up'] = {'url': self.exam_make_up.path[index::]}
+        else:
+            detail['exam_make_up'] = {'url': 'null'}
+        if self.exam_make_up_answer:
+            detail['exam_make_up_answer'] = {
+                'url': self.exam_make_up_answer.path[index::]}
+        else:
+            detail['exam_make_up_answer'] = {'url': 'null'}
+        if self.exam_make_up_part:
+            detail['exam_make_up_part'] = {
+                'url': self.exam_make_up_part.path[index::]}
+        else:
+            detail['exam_make_up_part'] = {'url': 'null'}
+        if self.auditing_opinion:
+            detail['auditing_opinion'] = {
+                'url': self.auditing_opinion.path[index::]}
+        else:
+            detail['auditing_opinion'] = {'url': 'null'}
+        return detail
 
 
 class GraDesFiles(models.Model):
