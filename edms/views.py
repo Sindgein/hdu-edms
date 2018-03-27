@@ -35,7 +35,7 @@ def get_teachfile_list(request):
     return JsonResponse(file_set_info, safe=False)
 
 
-def get_teachfile(request, filename):
+def get_teachfile(request, course_id):
     teacher = request.user.teacher
-    teachfile = teacher.course.get(course_id=filename)
+    teachfile = teacher.course.get(course_id=course_id)
     return JsonResponse(teachfile.file_detail(), safe=False)

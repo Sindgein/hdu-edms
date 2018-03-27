@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.edms, name='edms'),
     # path('f', views.file_download, name='download'),
     path('api/get_teachfile_list/',views.get_teachfile_list),
-    path('api/get_teachfile/<filename>/',views.get_teachfile)
+    path('api/get_teachfile/<course_id>/',views.get_teachfile)
 ]

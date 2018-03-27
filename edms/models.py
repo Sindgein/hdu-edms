@@ -1,6 +1,8 @@
 from django.db import models
 from users.models import Teacher, Student
-import json
+from .utils import FILES, FILES_CN
+import time
+import os
 
 
 class TeachFiles(models.Model):
@@ -70,74 +72,22 @@ class TeachFiles(models.Model):
 
     def file_detail(self):
         detail = {}
-        try:
-            index = self.teaching_syllabus.path.find('uploads')
-        except:
-            pass
-        if self.teaching_syllabus:
-            detail['teaching_syllabus'] = {
-                'url': self.teaching_syllabus.path[index::]}
-        else:
-            detail['teaching_syllabus'] = {'url': 'null'}
-        if self.teaching_plan:
-            detail['teaching_plan'] = {'url': self.teaching_plan.path[index::]}
-        else:
-            detail['teaching_plan'] = {'url': 'null'}
-        if self.student_score:
-            detail['student_score'] = {'url': self.student_score.path[index::]}
-        else:
-            detail['student_score'] = {'url': 'null'}
-        if self.teaching_sum_up:
-            detail['teaching_sum_up'] = {
-                'url': self.teaching_sum_up.path[index::]}
-        else:
-            detail['teaching_sum_up'] = {'url': 'null'}
-        if self.exam_paper:
-            detail['exam_paper'] = {'url': self.exam_paper.path[index::]}
-        else:
-            detail['exam_paper'] = {'url': 'null'}
-        if self.exam_paper_answer:
-            detail['exam_paper_answer'] = {
-                'url': self.exam_paper_answer.path[index::]}
-        else:
-            detail['exam_paper_answer'] = {'url': 'null'}
-        if self.exam_paper_analyze:
-            detail['exam_paper_analyze'] = {
-                'url': self.exam_paper_analyze.path[index::]}
-        else:
-            detail['exam_paper_analyze'] = {'url': 'null'}
-        if self.exam_part:
-            detail['exam_part'] = {'url': self.exam_part.path[index::]}
-        else:
-            detail['exam_part'] = {'url': 'null'}
-        if self.exam_make_up:
-            detail['exam_make_up'] = {'url': self.exam_make_up.path[index::]}
-        else:
-            detail['exam_make_up'] = {'url': 'null'}
-        if self.exam_make_up_answer:
-            detail['exam_make_up_answer'] = {
-                'url': self.exam_make_up_answer.path[index::]}
-        else:
-            detail['exam_make_up_answer'] = {'url': 'null'}
-        if self.exam_make_up_part:
-            detail['exam_make_up_part'] = {
-                'url': self.exam_make_up_part.path[index::]}
-        else:
-            detail['exam_make_up_part'] = {'url': 'null'}
-        if self.auditing_opinion:
-            detail['auditing_opinion'] = {
-                'url': self.auditing_opinion.path[index::]}
-        else:
-            detail['auditing_opinion'] = {'url': 'null'}
-
+        for f, fc in zip(FILES, FILES_CN):
+            item = getattr(self, f)
+            if item:
+                detail[f] = {'url': item.url, 'filename': fc,
+                             'mtime': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(item.path)))}
+            else:
+                detail[f] = {'url': 'null', 'filename': fc + ' [未上传]'}
         return detail
 
 
 class GraDesFiles(models.Model):
-        # 基本信息,需要填写的表单
+    # 基本信息,需要填写的表单
     student = models.ForeignKey(
         Student, verbose_name='学生', on_delete=models.CASCADE, related_name='gradesfiles')
-    name = models.CharField(max_length=100, verbose_name='毕设题目', null=True)
+    graduation_thesis = models.CharField(
+        max_length=100, verbose_name='毕设题目', null=True)
     # 毕设资料清单,需要上传的文件
     task = models.FileField(
         verbose_name='任务书', upload_to='uploads/GraDesFiles/task', blank=True)
@@ -171,27 +121,14 @@ class GraDesFiles(models.Model):
     def __str__(self):
         return u'%s' % self.name
 
-# class Course(models.Model):
-#     teacher = models.ForeignKey(
-#         Teacher, on_delete=models.CASCADE, verbose_name='老师，负责上传', related_name='course')
-#     # 考虑到上课教师可能不唯一，存在多个教师授课的情况
-#     teachers = models.CharField(max_length='100', verbose_name='授课教师')
-#     year = models.IntegerField(verbose_name='学年')
-#     term = models.CharField(max_length=10, verbose_name='学期')
-#     course_name = models.CharField(max_length=100, verbose_name='课程名称')
-#     course_id = models.CharField(max_length=100, verbose_name='选课课号')
+    def file_info_list(self):
+        return {
+            'graduation_thesis': self.graduation_thesis,
+            'student_name': self.student.name,
+            'student_id': self.student.user.username
+        }
 
-#     class Meta:
-#         verbose_name = '档案信息'
-#         verbose_name_plural = '档案信息'
+    def file_detail(self):
 
-#     @classmethod
-#     def get_course_by_teacher(cls, teacher):
-#         courses = [{'course_name': course.course_name,
-#                     'course_id': course.course_id,
-#                     'year': course.year,
-#                     'term': course.term}
-#                    for course in cls.objects.get(teacher=teacher)]
-#         return json.dumps(courses)
+        pass
 
-# # 教案，对应于课程

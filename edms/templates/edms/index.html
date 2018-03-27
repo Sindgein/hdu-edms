@@ -74,15 +74,15 @@
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href="#" @click="change_header_title('教学档案列表')">
+          <a class="mdl-navigation__link" href="#" @click="change_header_title('教学档案列表',1)">
             <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>教学档案列表</a>
-          <a class="mdl-navigation__link" href="#" @click="change_header_title('毕设档案列表')">
+          <a class="mdl-navigation__link" href="#" @click="change_header_title('毕设档案列表',2)">
             <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>毕设档案列表</a>
-          <a class="mdl-navigation__link" href="#" @click="change_header_title('新建档案')">
+          <a class="mdl-navigation__link" href="#" @click="change_header_title('新建档案',3)">
             <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>新建档案</a>
-          <a class="mdl-navigation__link" href="#" @click="change_header_title('我的学生')">
+          <a class="mdl-navigation__link" href="#" @click="change_header_title('我的学生',4)">
             <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>我的学生</a>
-          <a class="mdl-navigation__link" href="#" @click="change_header_title('帮忙审核')">
+          <a class="mdl-navigation__link" href="#" @click="change_header_title('帮忙审核',5)">
             <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>帮忙审核</a>
           <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href="#">
@@ -92,28 +92,29 @@
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div v-if="header_title==='教学档案列表'&&current_index===-1" class="mdl-grid demo-content">
-          {% include './teachfile.html' %}
+        <div v-if="page_index===1&&current_index===-1" class="mdl-grid demo-content">
+          {% include './teach_file_list.html' %}
         </div>
-        <div v-if="header_title==='教学档案列表'&&current_index!==-1" class="mdl-grid demo-content">
-            {% include './teachfiledetail.html' %}
+        <div v-if="page_index===1&&current_index!==-1" class="mdl-grid demo-content">
+          {% include './teach_file_detail.html' %}
         </div>
-        <div v-if="header_title==='毕设档案列表'" class="mdl-grid demo-content">
-          <!-- {% include './teachfile.html' %} -->
+        <div v-if="page_index===2" class="mdl-grid demo-content">
+
         </div>
-        <div v-if="header_title==='新建档案'" class="mdl-grid demo-content">
-          <!-- {% include './teachfile.html' %} -->
+        <div v-if="page_index===3" class="mdl-grid demo-content">
+
         </div>
-        <div v-if="header_title==='我的学生'" class="mdl-grid demo-content">
-          <!-- {% include './teachfile.html' %} -->
+        <div v-if="page_index===4" class="mdl-grid demo-content">
+
         </div>
-        <div v-if="header_title==='帮忙审核'" class="mdl-grid demo-content">
-          <!-- {% include './teachfile.html' %} -->
+        <div v-if="page_index===5" class="mdl-grid demo-content">
+
         </div>
       </main>
     </div>
+    <a v-if="current_index!==-1" href="/edms/" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">返回上一级</a>
   </div>
-  <a href="/edms/" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">View Source</a>
+
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="/static/mdl/material.min.js"></script>
   <script src="/static/js/muse-ui.js"></script>
