@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
-
-
 # 管理员，通过django admin后台注册，不开放注册入口
 class Admin(models.Model):
     user = models.OneToOneField(
@@ -14,6 +13,7 @@ class Admin(models.Model):
 
     def __str__(self):
         return u'%s' % self.username
+
 
 
 class Teacher(models.Model):
@@ -28,6 +28,9 @@ class Teacher(models.Model):
 
     def __str__(self):
         return u'%s' % self.name
+
+
+
 
 
 class Student(models.Model):

@@ -1,8 +1,8 @@
 from django.db import models
-from users.models import Teacher, Student
-from .utils import FILES, FILES_CN
+from .utils import FILES, FILES_CN, GRADESIN, GRADESIN_CN
 import time
 import os
+from users.models import Teacher
 
 
 class TeachFiles(models.Model):
@@ -84,8 +84,9 @@ class TeachFiles(models.Model):
 
 class GraDesFiles(models.Model):
     # 基本信息,需要填写的表单
-    student = models.ForeignKey(
-        Student, verbose_name='学生', on_delete=models.CASCADE, related_name='gradesfiles')
+    teacher = models.ForeignKey(
+        Teacher, verbose_name='老师', on_delete=models.CASCADE, related_name='gradesfiles')
+    student_id = models.CharField(max_length=100, blank=True)
     graduation_thesis = models.CharField(
         max_length=100, verbose_name='毕设题目', null=True)
     # 毕设资料清单,需要上传的文件
@@ -129,6 +130,14 @@ class GraDesFiles(models.Model):
         }
 
     def file_detail(self):
-
-        pass
-
+        detail = {}
+        for f, fc in zip(GRADESIN, GRADESIN_CN):
+            item = getattr(self, f)
+            if item:
+                detail[f] = {
+                    'url': item.url,
+                    'filename': fc,
+                    'mtime': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(item.path)))
+                }
+            else:
+                detail[f] = {'url': 'null', 'filename': fc + ' [未上传]'}

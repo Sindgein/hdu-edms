@@ -92,17 +92,17 @@
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div v-if="page_index===1&&current_index===-1" class="mdl-grid demo-content">
+        <div v-if="page_index===1&&tf_index===-1" class="mdl-grid demo-content">
           {% include './teach_file_list.html' %}
         </div>
-        <div v-if="page_index===1&&current_index!==-1" class="mdl-grid demo-content">
+        <div v-if="page_index===1&&tf_index!==-1" class="mdl-grid demo-content">
           {% include './teach_file_detail.html' %}
         </div>
-        <div v-if="page_index===2" class="mdl-grid demo-content">
-
+        <div v-if="page_index===2&&tf_index===-1" class="mdl-grid demo-content">
+          {% include './gradesign_file_list.html' %}
         </div>
         <div v-if="page_index===3" class="mdl-grid demo-content">
-
+          {% include './gradesign_file_detail.html' %}
         </div>
         <div v-if="page_index===4" class="mdl-grid demo-content">
 
@@ -112,7 +112,7 @@
         </div>
       </main>
     </div>
-    <a v-if="current_index!==-1" href="/edms/" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">返回上一级</a>
+    <a v-if="tf_index!==-1" href="/edms/" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">返回上一级</a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
