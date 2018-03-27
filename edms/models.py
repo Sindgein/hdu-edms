@@ -1,8 +1,10 @@
 from django.db import models
-from .utils import FILES, FILES_CN, GRADESIN, GRADESIN_CN
+from users.models import Teacher, Student
+from django.contrib.auth.models import User
+from .utils import FILES, FILES_CN
+from .utils import GRADESIN, GRADESIN_CN
 import time
 import os
-from users.models import Teacher
 
 
 class TeachFiles(models.Model):
@@ -122,11 +124,18 @@ class GraDesFiles(models.Model):
     def __str__(self):
         return u'%s' % self.name
 
+    def get_students(self):
+        students = ''
+        for i in self.student_id.split(" "):
+            # '姓名 '
+            students += User.objects.get(username=i).student.name + ' '
+        return students
+
     def file_info_list(self):
         return {
             'graduation_thesis': self.graduation_thesis,
-            'student_name': self.student.name,
-            'student_id': self.student.user.username
+            'student_name': self.get_students(),
+            'student_id': self.student_id
         }
 
     def file_detail(self):

@@ -30,9 +30,6 @@ class Teacher(models.Model):
         return u'%s' % self.name
 
 
-
-
-
 class Student(models.Model):
     user = models.OneToOneField(
         User, related_name='student', on_delete=models.CASCADE)
