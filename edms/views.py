@@ -31,7 +31,7 @@ def file_download(request):
 def get_teach_file_list(request):
     teacher = request.user.teacher
     file_set = teacher.course.all()
-    file_set_info = [file.file_info_list() for file in file_set]
+    file_set_info = [f.file_info_list() for f in file_set]
     return JsonResponse(file_set_info, safe=False)
 
 
@@ -40,8 +40,13 @@ def get_teach_file_detail(request, course_id):
     teachfile = teacher.course.get(course_id=course_id)
     return JsonResponse(teachfile.file_detail(), safe=False)
 
-def get_gradesign_file_list(request):
-    pass
 
-def get_gradesign_file_detail(request,gradesign):
+def get_gradesign_file_list(request):
+    teacher = request.user.teacher
+    file_set = teacher.gradesfiles.all()
+    file_set_info = [f.file_info_list() for f in file_set]
+    return JsonResponse(file_set_info, safe=False)
+
+
+def get_gradesign_file_detail(request, gradesign):
     pass

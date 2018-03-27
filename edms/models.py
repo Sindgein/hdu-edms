@@ -88,9 +88,9 @@ class GraDesFiles(models.Model):
     # 基本信息,需要填写的表单
     teacher = models.ForeignKey(
         Teacher, verbose_name='老师', on_delete=models.CASCADE, related_name='gradesfiles')
-    student_id = models.CharField(max_length=100, blank=True)
     graduation_thesis = models.CharField(
         max_length=100, verbose_name='毕设题目', null=True)
+    student_id = models.CharField(max_length=100, blank=True)
     # 毕设资料清单,需要上传的文件
     task = models.FileField(
         verbose_name='任务书', upload_to='uploads/GraDesFiles/task', blank=True)
@@ -122,14 +122,17 @@ class GraDesFiles(models.Model):
         )
 
     def __str__(self):
-        return u'%s' % self.name
+        return u'%s' % self.graduation_thesis
 
     def get_students(self):
-        students = ''
-        for i in self.student_id.split(" "):
-            # '姓名 '
-            students += User.objects.get(username=i).student.name + ' '
-        return students
+        if self.student_id:
+            students = ''
+            for i in self.student_id.split(" "):
+                # '姓名 '
+                students += User.objects.get(username=i).student.name + ' '
+            return students
+        else:
+            return '暂无学生选择此课题'
 
     def file_info_list(self):
         return {
