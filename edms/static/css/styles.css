@@ -216,6 +216,11 @@ _:-ms-input-placeholder, :root .demo-graph {
   height: 200px;
 }
 
+.custom-card-content{
+  height: 800px;
+  padding: 32px;
+}
+
 .div-content{
   height: 100%;
   width: 100%;

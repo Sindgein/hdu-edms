@@ -9,7 +9,7 @@ var app = new Vue({
     gradesign_files: [],
     gradesign_file: null,
     gf_index: -1,
-
+    new_type: -1,
     page_index: 1,
 
   },
@@ -18,11 +18,22 @@ var app = new Vue({
       this.header_title = title;
       this.page_index = page_index;
       this.tf_index = -1;
+      this.gf_index = -1;
+      this.new_type = -1;
     },
-    read_more(tf) {
-      this.tf_index = this.teach_files.indexOf(tf);
-      this.header_title = tf.course_name + ' ' + tf.course_id
+    read_more(f, page_index) {
+      if (page_index === 1) {
+        this.tf_index = this.teach_files.indexOf(f);
+        this.header_title = f.course_name + ' ' + f.course_id
+      }
+      else if (page_index === 2) {
+        this.gf_index = this.gradesign_files.indexOf(f)
+        this.header_title = f.graduation_thesis
+      }
     },
+    new_file(new_type) {
+      this.new_type = new_type;
+    }
   },
   mounted: function () {
     this.$nextTick(function () {

@@ -7,23 +7,22 @@
   <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <title>HDU EDMS</title>
-  <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="/static/images/android-desktop.png">
-  <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+  <meta name="apple-mobile-web-app-title" content="HDU EDMS">
   <link rel="apple-touch-icon-precomposed" href="/static/images/ios-desktop.png">
   <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
   <meta name="msapplication-TileColor" content="#3372DF">
   <link rel="shortcut icon" href="/static/images/favicon.png">
-  <link rel="stylesheet" href="/static/css/muse-ui.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
-  <link rel="stylesheet" href="/static/css/styles.css">
   <link rel="stylesheet" href="/static/css/custom.css">
+  <link rel="stylesheet" href="/static/css/muse-ui.css">
+  <!-- <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css"> -->
+  <link rel="stylesheet" href="/static/mdl/material.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 
 <body>
@@ -93,26 +92,29 @@
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
         <div v-if="page_index===1&&tf_index===-1" class="mdl-grid demo-content">
-          {% include './teach_file_list.html' %}
+          {% include './pages/teach_file_list.html' %}
         </div>
         <div v-if="page_index===1&&tf_index!==-1" class="mdl-grid demo-content">
-          {% include './teach_file_detail.html' %}
+          {% include './pages/teach_file_detail.html' %}
         </div>
-        <div v-if="page_index===2&&tf_index===-1" class="mdl-grid demo-content">
-          {% include './gradesign_file_list.html' %}
+        <div v-if="page_index===2&&gf_index===-1" class="mdl-grid demo-content">
+          {% include './pages/gradesign_file_list.html' %}
         </div>
-        <div v-if="page_index===3" class="mdl-grid demo-content">
-          {% include './gradesign_file_detail.html' %}
+        <div v-if="page_index===2&&gf_index!==-1" class="mdl-grid demo-content">
+          {% include './pages/gradesign_file_detail.html' %}
         </div>
-        <div v-if="page_index===4" class="mdl-grid demo-content">
-
+        <div v-if="page_index===3&&new_type===-1" class="mdl-grid demo-content">
+          {% include './pages/new_file.html' %}
         </div>
-        <div v-if="page_index===5" class="mdl-grid demo-content">
-
+        <div v-if="page_index===3&&new_type===1" class="mdl-grid demo-content">
+          {% include './pages/new_teach_file.html' %}
+        </div>
+        <div v-if="page_index===3&&new_type===2" class="mdl-grid demo-content">
+            {% include './pages/new_gradesign_file.html' %}
         </div>
       </main>
     </div>
-    <a v-if="tf_index!==-1" href="/edms/" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">返回上一级</a>
+    <a v-if="tf_index!==-1||gf_index!==-1" href="/edms/" id="bt_back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">返回上一级</a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -123,7 +125,7 @@
 
 </body>
 <style>
-  #view-source {
+  #bt_back {
     position: fixed;
     display: block;
     right: 0;

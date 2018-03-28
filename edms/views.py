@@ -48,5 +48,7 @@ def get_gradesign_file_list(request):
     return JsonResponse(file_set_info, safe=False)
 
 
-def get_gradesign_file_detail(request, gradesign):
-    pass
+def get_gradesign_file_detail(request, graduation_thesis):
+    teacher = request.user.teacher
+    gradesign = teacher.gradesfiles.get(graduation_thesis=graduation_thesis)
+    return JsonResponse(gradesign.file_detail(), safe=False)

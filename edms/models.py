@@ -153,3 +153,4 @@ class GraDesFiles(models.Model):
                 }
             else:
                 detail[f] = {'url': 'null', 'filename': fc + ' [未上传]'}
+        return detail
