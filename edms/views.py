@@ -4,6 +4,7 @@ from django.http import HttpResponse, FileResponse, StreamingHttpResponse, JsonR
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
+from .utils import FILES
 import json
 # Create your views here.
 
@@ -61,18 +62,17 @@ def get_gradesign_file_detail(request, graduation_thesis):
 def api_create_teach_file(request):
     data = request.POST
     files = request.FILES
-    # teachfile = TeachFiles(teacher=request.user.teacher, teachers=data['teachers'],
-    #                        year=data['year'], term=data['term'],
-    #                        course_name=data['course_name'], course_id=data['course_id'])
-    print(request.user)
     teachfile = TeachFiles(teacher=request.user.teacher)
-    setattr(teachfile,'teaching_syllabus',files.get('teaching_syllabus'))
+    for i in FILES:
+        try:
+            setattr(teachfile, i, files.get(i))
+        except AttributeError:
+            pass
     for i in data:
         if i == 'year' or i == 'term':
             setattr(teachfile, i, int(data[i]))
         else:
             setattr(teachfile, i, data[i])
-  
-    teachfile.save()
 
+    teachfile.save()
     return HttpResponse('success')

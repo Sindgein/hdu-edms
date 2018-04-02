@@ -30,7 +30,8 @@ var app = new Vue({
       'exam_make_up',
       'exam_make_up_answer',
       'exam_make_up_part'
-    ]
+    ],
+    form_files: []
 
   },
   methods: {
@@ -55,23 +56,18 @@ var app = new Vue({
       this.new_type = new_type;
     },
     submit_teach_file() {
-
       var data = new FormData()
       data.append('teachers', this.teachers)
       data.append('year', this.year)
       data.append('term', this.term)
       data.append('course_name', this.course_name)
       data.append('course_id', this.course_id)
-      for (i in this.file_names) {
-        file_id = this.file_names[i]
-        console.log(file_id)
-        // if (document.getElementById(file_id).files.length > 0) {
-          var teach_file = this.$refs.teaching_syllabus.files[0]
-          // var teach_file = $(file_id).prop('files')[0]
-          data.append(file_id, teach_file)
-        // }
+      for (i in this.form_files) {
+        if (this.form_files[i].files > 0) {
+          var teach_file = this.form_files[i].files[0]
+          data.append(this.file_names[i], teach_file)
+        }
       }
-
       $.ajax({
         url: '/edms/api/create_teach_file/',
         type: 'POST',
@@ -80,7 +76,6 @@ var app = new Vue({
         processData: false,
         contentType: false
       });
-
     }
   },
   mounted: function () {
@@ -90,6 +85,9 @@ var app = new Vue({
       $.get('/edms/api/get_gradesign_file_list/',
         (data) => this.gradesign_files = data);
     })
+
+
+
   },
   watch: {
     tf_index: function () {
@@ -105,7 +103,28 @@ var app = new Vue({
         (data) => {
           this.gradesign_file = data;
         })
+    },
+    page_index: function () {
+
+      console.log('form files ready');
+      setTimeout(
+        () => {
+        this.form_files = [
+          this.$refs.teaching_syllabus,
+          this.$refs.teaching_plan,
+          this.$refs.student_score,
+          this.$refs.teaching_sum_up,
+          this.$refs.exam_paper,
+          this.$refs.exam_paper_answer,
+          this.$refs.exam_paper_analyze,
+          this.$refs.exam_part,
+          this.$refs.exam_make_up,
+          this.$refs.exam_make_up_answer,
+          this.$refs.exam_make_up_part
+        ]
+        }, 1000)
     }
+
   }
 
 

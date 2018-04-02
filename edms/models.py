@@ -3,7 +3,9 @@ from ums.models import Teacher, Student
 from django.contrib.auth.models import User
 from .utils import FILES, FILES_CN
 from .utils import GRADESIN, GRADESIN_CN
+from .file_storage.file_storage import FileStorage
 import time
+import random
 import os
 
 
@@ -19,37 +21,37 @@ class TeachFiles(models.Model):
     ready2audit = models.BooleanField(default=False, verbose_name='是否提交审核')
     # 教学大纲
     teaching_syllabus = models.FileField(
-        verbose_name='教学大纲', upload_to='uploads/TeachFiles/teaching_syllabus', blank=True)
+        verbose_name='教学大纲', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 教学计划
     teaching_plan = models.FileField(
-        verbose_name='教学计划', upload_to='uploads/TeachFiles/teaching_plan', blank=True)
+        verbose_name='教学计划', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 学生成绩登记册
     student_score = models.FileField(
-        verbose_name='学生成绩登记册', upload_to='uploads/TeachFiles/student_socre', blank=True)
+        verbose_name='学生成绩登记册', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 教学小结表
     teaching_sum_up = models.FileField(
-        verbose_name='教学小结表', upload_to='uploads/TeachFiles/teaching_sum_up', blank=True)
+        verbose_name='教学小结表', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 正考试卷样卷
     exam_paper = models.FileField(
-        verbose_name='正考试卷样卷', upload_to='uploads/TeachFiles/exam_paper', blank=True)
+        verbose_name='正考试卷样卷', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 正考试卷答案及评分标准
     exam_paper_answer = models.FileField(
-        verbose_name='正考试卷答案及评分标准', upload_to='uploads/TeachFiles/exam_paper_answer', blank=True)
+        verbose_name='正考试卷答案及评分标准', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 试卷分析
     exam_paper_analyze = models.FileField(
-        verbose_name='试卷分析', upload_to='uploads/TeachFiles/exam_paper_analyze', blank=True)
+        verbose_name='试卷分析', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 正考部分
     exam_part = models.FileField(
-        verbose_name='正考部分', upload_to='uploads/TeachFiles/exam_part', blank=True)
+        verbose_name='正考部分', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 补考试卷样卷
     exam_make_up = models.FileField(
-        verbose_name='补考试卷样卷', upload_to='uploads/TeachFiles/exam_make_up', blank=True)
+        verbose_name='补考试卷样卷', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 补考试卷答案及评分标准
     exam_make_up_answer = models.FileField(
-        verbose_name='补考试卷答案及评分标准', upload_to='uploads/TeachFiles/exam_make_up_answer', blank=True)
+        verbose_name='补考试卷答案及评分标准', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 补考部分
     exam_make_up_part = models.FileField(
-        verbose_name='补考部分', upload_to='uploads/TeachFiles/exam_make_up_part', blank=True)
+        verbose_name='补考部分', upload_to='uploads/TeachFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     # 审核意见
     auditing_opinion = models.TextField(verbose_name='审核意见', blank=True)
 
@@ -62,6 +64,9 @@ class TeachFiles(models.Model):
 
     def __str__(self):
         return u'%s' % self.course_name
+
+    def get_teacher_name(self):
+        return self.teacher.user.username
 
     def file_info_list(self):
         return {
