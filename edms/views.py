@@ -2,9 +2,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, FileResponse, StreamingHttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from .models import *
 import json
 # Create your views here.
+
 
 @login_required
 def edms(request):
@@ -53,3 +55,24 @@ def get_gradesign_file_detail(request, graduation_thesis):
     teacher = request.user.teacher
     gradesign = teacher.gradesfiles.get(graduation_thesis=graduation_thesis)
     return JsonResponse(gradesign.file_detail(), safe=False)
+
+
+@csrf_exempt
+def api_create_teach_file(request):
+    data = request.POST
+    files = request.FILES
+    # teachfile = TeachFiles(teacher=request.user.teacher, teachers=data['teachers'],
+    #                        year=data['year'], term=data['term'],
+    #                        course_name=data['course_name'], course_id=data['course_id'])
+    print(request.user)
+    teachfile = TeachFiles(teacher=request.user.teacher)
+    setattr(teachfile,'teaching_syllabus',files.get('teaching_syllabus'))
+    for i in data:
+        if i == 'year' or i == 'term':
+            setattr(teachfile, i, int(data[i]))
+        else:
+            setattr(teachfile, i, data[i])
+  
+    teachfile.save()
+
+    return HttpResponse('success')

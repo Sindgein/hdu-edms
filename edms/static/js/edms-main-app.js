@@ -12,6 +12,26 @@ var app = new Vue({
     new_type: -1,
     page_index: 1,
 
+    teachers: '',
+    year: null,
+    term: null,
+    course_name: '',
+    course_id: '',
+    teaching_syllabus: null,
+    file_names: [
+      'teaching_syllabus',
+      'teaching_plan',
+      'student_score',
+      'teaching_sum_up',
+      'exam_paper',
+      'exam_paper_answer',
+      'exam_paper_analyze',
+      'exam_part',
+      'exam_make_up',
+      'exam_make_up_answer',
+      'exam_make_up_part'
+    ]
+
   },
   methods: {
     change_header_title(title, page_index) {
@@ -33,6 +53,34 @@ var app = new Vue({
     },
     new_file(new_type) {
       this.new_type = new_type;
+    },
+    submit_teach_file() {
+
+      var data = new FormData()
+      data.append('teachers', this.teachers)
+      data.append('year', this.year)
+      data.append('term', this.term)
+      data.append('course_name', this.course_name)
+      data.append('course_id', this.course_id)
+      for (i in this.file_names) {
+        file_id = this.file_names[i]
+        console.log(file_id)
+        // if (document.getElementById(file_id).files.length > 0) {
+          var teach_file = this.$refs.teaching_syllabus.files[0]
+          // var teach_file = $(file_id).prop('files')[0]
+          data.append(file_id, teach_file)
+        // }
+      }
+
+      $.ajax({
+        url: '/edms/api/create_teach_file/',
+        type: 'POST',
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false
+      });
+
     }
   },
   mounted: function () {

@@ -109,7 +109,11 @@
           {% include './pages/new_teach_file.html' %}
         </div>
         <div v-if="page_index===3&&new_type===2" class="mdl-grid demo-content">
-            {% include './pages/new_gradesign_file.html' %}
+          {% include './pages/new_gradesign_file.html' %}
+        </div>
+        <div v-if="page_index===3&&new_type===3" class="mdl-grid demo-content">
+          <!-- {% include './pages/new_student_info.html' %} -->
+          <new-teach-file></new-teach-file>
         </div>
       </main>
     </div>
@@ -121,6 +125,7 @@
   <script src="/static/js/muse-ui.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="/static/js/edms-main-app.js"></script>
+  <!-- <script src="/static/js/new-teach-file-app.js"></script> -->
 
 </body>
 <style>
