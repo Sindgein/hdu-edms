@@ -1,11 +1,63 @@
-<div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing">
+<div id='new-gradesign-file-app' class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing">
     <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
         <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
             <h2 class="mdl-card__title-text">毕业设计档案</h2>
         </div>
-        <div class="custom-card-content">
-            <mu-text-field label="毕设题目" label-float></mu-text-field>
-            <mu-text-field label="学生" label-float></mu-text-field>
+        <mu-text-field label="毕设题目" label-float class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"></mu-text-field>
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+            <!-- <p style="color:grey">学生</p> -->
+            <mu-text-field hint-text="学生" disabled full-width></mu-text-field>
+
+            <mu-chip v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12,13]" style="margin:4px">
+                14062130 张豪
+            </mu-chip>
+        </div>
+        <div class="mdl-grid demo-content">
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>任务书</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>外文翻译</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>文献综述</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>开题报告</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>毕业论文</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>考核表</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>指导记录</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>毕业设计附件</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>实习手册</span>
+                <input type="file">
+                </input>
+            </div>
         </div>
         <div class="mdl-card__actions mdl-card--border">
             <a @click="new_file(1)" class="mdl-button mdl-js-button mdl-js-ripple-effect">点击创建</a>

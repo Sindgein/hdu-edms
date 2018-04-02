@@ -1,6 +1,6 @@
  {% extends "./login.html" %} 
  {% block card %}
-    <form action="/user/register/" class="form" method="post" onsubmit="return check_register_form()">
+    <form action="/register/" class="form" method="post" onsubmit="return check_register_form()">
         {% csrf_token %}
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-div">
             <input class="mdl-textfield__input form-content" value="{{ username }}" pattern="[A-Za-z0-9]*" type="text" name='username' id="_username">

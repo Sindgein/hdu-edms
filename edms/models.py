@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import Teacher, Student
+from ums.models import Teacher, Student
 from django.contrib.auth.models import User
 from .utils import FILES, FILES_CN
 from .utils import GRADESIN, GRADESIN_CN

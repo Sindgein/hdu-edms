@@ -1,14 +1,71 @@
-<div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing">
+<div id='new-teach-file-app' class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing">
     <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
         <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
             <h2 class="mdl-card__title-text">教学档案</h2>
         </div>
-        <div class="custom-card-content">
-            <mu-text-field label="任课教师" label-float></mu-text-field>
-            <mu-date-picker hint-text="选择学年" format='YYYY学年'></mu-date-picker>
-            <mu-text-field label="学期（1或2）" label-float></mu-text-field>
-            <mu-text-field label="课程名称" label-float></mu-text-field>
-            <mu-text-field label="选课课号" label-float></mu-text-field>
+        <div class="mdl-grid demo-content">
+            <mu-text-field label="任课教师" label-float class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"></mu-text-field>
+            <mu-text-field label="学年（4位数字）" label-float class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"></mu-text-field>
+            <mu-text-field label="学期（1或2）" label-float class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"></mu-text-field>
+            <mu-text-field label="课程名称" full-width label-float class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"></mu-text-field>
+            <mu-text-field label="选课课号" full-width label-float class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"></mu-text-field>
+            <!-- <div class="mdl-layout-spacer"></div> -->
+
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>教学大纲</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>教学计划</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>学生成绩等级手册</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>教学小结表</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>正考试卷样卷</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>正考试卷答案及评分标准</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>试卷分析</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>正考部分</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>补考试卷样卷</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>补考试卷答案及评分标准</span>
+                <input type="file">
+                </input>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                <span>补考部分</span>
+                <input type="file">
+                </input>
+            </div>
         </div>
         <div class="mdl-card__actions mdl-card--border">
             <a @click="new_file(1)" class="mdl-button mdl-js-button mdl-js-ripple-effect">点击创建</a>

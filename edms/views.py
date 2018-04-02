@@ -1,11 +1,12 @@
 # -*- coding:utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse, FileResponse, StreamingHttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
 from .models import *
 import json
 # Create your views here.
 
-
+@login_required
 def edms(request):
     content = {
         'user_id': request.user.username,

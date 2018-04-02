@@ -32,7 +32,7 @@
             <h2 class="mdl-card__title-text"></h2>
         </div>
         {% block card %}
-        <form action="/user/login/" class="form" method="post" onsubmit="return check_login_form()">
+        <form action="/" class="form" method="post" onsubmit="return check_login_form()">
             {% csrf_token %}
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-div">
                 <input class="mdl-textfield__input form-content" autocomplete="off" value="{{username}}" type="text"
@@ -56,7 +56,7 @@
                 </button>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-div">
-                <a href="/user/register/" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect form-content-a">
+                <a href="/register/" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect form-content-a">
                     注册
                 </a>
             </div>

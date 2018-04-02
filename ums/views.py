@@ -9,7 +9,7 @@ from .models import Teacher
 
 
 @csrf_exempt
-def signin(request):
+def account_signin(request):
     context = {
         'username': '',
         'password': '',
@@ -29,7 +29,7 @@ def signin(request):
 
 
 @csrf_exempt
-def register(request):
+def account_register(request):
     context = {
         'username': '',
         'teacher_id': '',
@@ -72,7 +72,7 @@ def register(request):
     return render(request, 'users/register.html', context=context)
 
 
-def active(request,token):
+def account_active(request,token):
     try:
         username = token_confirm.confirm_validate_token(token)
     except:
