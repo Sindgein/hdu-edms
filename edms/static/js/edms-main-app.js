@@ -1,8 +1,91 @@
+var api = {
+  getTeachFileList: function (vm) {
+    $.get('/edms/api/get_teach_file_list/', (data) => vm.teach_files = data)
+  },
+  getGradesignList: function (vm) {
+    $.get('/edms/api/get_gradesign_file_list/', (data) => vm.gradesign_files = data)
+  },
+  getStudentList: function (vm) {
+    $.get('/edms/api/get_student_list/', (data) => vm.students = data)
+  },
+  getTeachFileDetail: function (vm) {
+    $.get('/edms/api/get_teach_file_detail/' +
+      vm.teach_files[vm.tf_index].course_id + '/', (data) => vm.teach_file = data)
+  },
+  getGradesginFileDetail: function (vm) {
+    $.get('/edms/api/get_gradesign_file_detail/' + vm.gradesign_files[vm.gf_index].graduation_thesis +
+      '-' + vm.gradesign_files[vm.gf_index].student_id + '/', (data) => vm.gradesign_file = data)
+  },
+  createFile: function (file_type, data) {
+    let api_url = '';
+    if (file_type === 'tf')
+      api_url = '/edms/api/create_teach_file/';
+    if (file_type === 'gf')
+      api_url = '/edms/api/create_gradesign_file/';
+    $.ajax({
+      url: api_url,
+      type: 'POST',
+      data: data,
+      cache: false,
+      processData: false,
+      contentType: false
+    })
+  },
+  createStudent: function (data) {
+    $.ajax({
+      url: "/edms/api/create_student/",
+      type: 'POST',
+      data: data,
+      cache: false,
+      processData: false,
+      contentType: false
+    })
+  },
+  uploadSingleFile: function (vm, file_type, file_id, file_name, data, student_id) {
+    var api_url = ''
+    if (file_type === 1) {
+      api_url = '/edms/api/single_upload/tf/' + file_id + '/' + file_name + '/'
+    }
+    if (file_type === 2) {
+      api_url = '/edms/api/single_upload/gf/' + file_id + '-' + student_id + '/' + file_name + '/'
+    }
+    $.ajax({
+      url: api_url,
+      type: 'POST',
+      data: data,
+      cache: false,
+      processData: false,
+      contentType: false,
+    });
+  }
+}
+
+var method = {
+
+}
+
+
+
 // app 变量为一个vue实例,包含了整个单页应用的页面逻辑控制,以及数据加载
 var app = new Vue({
   delimiters: ['[[', ']]'],
   el: '#app',
   data: {
+    dialog: false,
+    single_upload_cache: {
+      file_type: null,
+      file_id: null,
+      file_name: null,
+      data: null,
+      student_id: null,
+      clear: function () {
+        this.file_type = null
+        this.file_id = null
+        this.file_name = null
+        this.data = null
+        this.student_id = null
+      }
+    },
     header_title: '教学档案列表',
     teach_files: [],//教学档案列表
     teach_file: null,
@@ -39,6 +122,13 @@ var app = new Vue({
 
   },
   methods: {
+    open() {
+      this.dialog = true
+    },
+    close() {
+      this.dialog = false
+      this.single_upload_cache.clear()
+    },
     change_header_title(title, page_index) {
       this.header_title = title;
       this.page_index = page_index;
@@ -72,30 +162,20 @@ var app = new Vue({
   //Vue实例加载完成后需要获取数据列表
   mounted: function () {
     this.$nextTick(function () {
-      $.get('/edms/api/get_teach_file_list/',
-        (data) => this.teach_files = data);
-      $.get('/edms/api/get_gradesign_file_list/',
-        (data) => this.gradesign_files = data);
-      $.get('/edms/api/get_student_list/',
-        (data) => this.students = data);
+      api.getTeachFileList(this)
+      api.getGradesignList(this)
+      api.getStudentList(this)
     })
   },
   //通过对以下几个变量的观察,来控制相应的页面逻辑
   watch: {
     tf_index: function () {
-      $.get('/edms/api/get_teach_file_detail/' +
-        this.teach_files[this.tf_index].course_id + '/',
-        (data) => {
-          this.teach_file = data;
-        })
+      if (this.tf_index !== -1)
+        api.getTeachFileDetail(this)
     },
     gf_index: function () {
-      $.get('/edms/api/get_gradesign_file_detail/' +
-        this.gradesign_files[this.gf_index].graduation_thesis + '-' +
-        this.gradesign_files[this.gf_index].student_id + '/',
-        (data) => {
-          this.gradesign_file = data;
-        })
+      if (this.gf_index !== -1)
+        api.getGradesginFileDetail(this)
     },
   }
 })
@@ -140,14 +220,7 @@ function submit_teach_file() {
       data.append(file_names[i], teach_file)
     }
   }
-  $.ajax({
-    url: '/edms/api/create_teach_file/',
-    type: 'POST',
-    data: data,
-    cache: false,
-    processData: false,
-    contentType: false
-  });
+  api.createFile('tf', data);
 }
 
 function submit_gradesign_file() {
@@ -181,16 +254,8 @@ function submit_gradesign_file() {
       data.append(file_names[i], gradesign_file)
     }
   }
-  $.ajax({
-    url: '/edms/api/create_gradesign_file/',
-    type: 'POST',
-    data: data,
-    cache: false,
-    processData: false,
-    contentType: false
-  })
+  api.createFile('gf', data)
 }
-
 
 
 function submit_student_info() {
@@ -200,14 +265,7 @@ function submit_student_info() {
   data.append('_class', app.student_class)
   data.append('major', app.major)
   data.append('school', app.school)
-  $.ajax({
-    url: '/edms/api/create_student/',
-    type: 'POST',
-    data: data,
-    cache: false,
-    processData: false,
-    contentType: false
-  });
+  api.createStudent(data)
 }
 
 
@@ -219,45 +277,32 @@ function get_id(str) {
   return s.join(' ')
 }
 
-function upload_trigger(file_type, file_id, file_name, student_id) {
-  var file_input = app.$refs.upload
-  file_input.click()
-  var data = new FormData()
+function upload_single_confirm(file_type, file_id, file_name, student_id) {
+  var file_input = app.$refs.upload;
+  file_input.click();
+  var data = new FormData();
 
   file_input.addEventListener('change', function () {
     if (file_input.files.length > 0) {
-      console.log(file_type, file_id, file_name, student_id)
+      app.open()
       data.append(file_name, file_input.files[0])
-      var api_url = ''
-      if (file_type === 1) {
-        api_url = '/edms/api/single_upload/tf/' + file_id + '/' + file_name + '/'
-      }
-      if (file_type === 2) {
-        api_url = '/edms/api/single_upload/gf/' + file_id + '-' + student_id + '/' + file_name + '/'
-      }
-      $.ajax({
-        url: api_url,
-        type: 'POST',
-        data: data,
-        cache: false,
-        processData: false,
-        contentType: false
-      });
-      if (file_type === 1) {
-        setTimeout($.get('/edms/api/get_teach_file_detail/' +
-          app.teach_files[app.tf_index].course_id + '/',
-          (data) => {
-            app.teach_file = data;
-          }), 1000)
-      }
-      if (file_type === 2) {
-        setTimeout($.get('/edms/api/get_gradesign_file_detail/' +
-          app.gradesign_files[app.gf_index].graduation_thesis + '-' +
-          app.gradesign_files[app.gf_index].student_id + '/',
-          (data) => {
-            app.gradesign_file = data;
-          }), 1000)
-      }
+      app.single_upload_cache.file_type = file_type
+      app.single_upload_cache.file_id = file_id
+      app.single_upload_cache.file_name = file_name
+      app.single_upload_cache.student_id = student_id
+      app.single_upload_cache.data = data
+      setTimeout(() => app.$refs.upload_path.innerHTML = file_input.files[0].name, 500)
     }
   })
+}
+
+function upload_single() {
+  api.uploadSingleFile(app, app.single_upload_cache.file_type, app.single_upload_cache.file_id,
+    app.single_upload_cache.file_name, app.single_upload_cache.data, app.single_upload_cache.student_id)
+  app.close()
+  if (app.page_index === 1)
+    setTimeout(() => api.getTeachFileDetail(app), 1000)
+  if (app.page_index === 2)
+    setTimeout(() => api.getGradesginFileDetail(app), 1000)
+
 }

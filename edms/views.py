@@ -71,56 +71,75 @@ def api_get_student_list(request):
 
 @csrf_exempt
 def api_create_teach_file(request):
-    data = request.POST
-    files = request.FILES
-    teachfile = TeachFiles(teacher=request.user.teacher)
-    for i in FILES:
-        try:
-            setattr(teachfile, i, files.get(i))
-        except AttributeError:
-            pass
-    for i in data:
-        if i == 'year' or i == 'term':
-            setattr(teachfile, i, int(data[i]))
-        else:
-            setattr(teachfile, i, data[i])
+    rsp = {'message': 'operation success', 'status_code': 200}
+    try:
+        data = request.POST
+        files = request.FILES
+        teachfile = TeachFiles(teacher=request.user.teacher)
+        for i in FILES:
+            try:
+                setattr(teachfile, i, files.get(i))
+            except AttributeError:
+                pass
+        for i in data:
+            if i == 'year' or i == 'term':
+                setattr(teachfile, i, int(data[i]))
+            else:
+                setattr(teachfile, i, data[i])
 
-    teachfile.save()
-    return HttpResponse('teach file saved!')
+        teachfile.save()
+    except:
+        rsp['message'] = 'operation failed'
+        rsp['status_code'] = 400
+        
+    return JsonResponse(rsp, safe=False)
 
 
 @csrf_exempt
 def api_create_gradesign_file(request):
-    teacher = request.user.teacher
-    data = request.POST
-    files = request.FILES
-    gfile = GraDesFiles(teacher=teacher, graduation_thesis=data['gradesign_thesis'],
-                        student_id=data['students'])
-    for i in GRADESIN:
-        try:
-            setattr(gfile, i, files.get(i))
-        except AttributeError:
-            pass
-    gfile.save()
-    return HttpResponse('gradesign file saved!')
+    rsp = {'message': 'operation success', 'status_code': 200}
+    try:
+        teacher = request.user.teacher
+        data = request.POST
+        files = request.FILES
+        gfile = GraDesFiles(teacher=teacher, student_id=data['students'],
+                            graduation_thesis=data['gradesign_thesis'])
+        for i in GRADESIN:
+            try:
+                setattr(gfile, i, files.get(i))
+            except AttributeError:
+                pass
+        gfile.save()
+    except:
+        rsp['message'] = 'operation failed'
+        rsp['status_code'] = 400
+
+    return JsonResponse(rsp, safe=False)
 
 
 @csrf_exempt
 def api_creat_student(request):
-    teacher = request.user.teacher
-    data = request.POST
-    user = User(username=data['student_id'])
-    user.set_password(data['student_id'])
-    user.save()
-    student = Student(user=user, teacher=teacher,
-                      name=data['student_name'], _class=data['_class'],
-                      major=data['major'], school=data['school'])
-    student.save()
-    return HttpResponse("student saved")
+    rsp = {'message': 'operation success', 'status_code': 200}
+    try:
+        teacher = request.user.teacher
+        data = request.POST
+        user = User(username=data['student_id'])
+        user.set_password(data['student_id'])
+        user.save()
+        student = Student(user=user, teacher=teacher,
+                          name=data['student_name'], _class=data['_class'],
+                          major=data['major'], school=data['school'])
+        student.save()
+    except:
+        rsp['message'] = 'operation failed'
+        rsp['status_code'] = 400
+
+    return JsonResponse(rsp, safe=False)
 
 
 @csrf_exempt
 def api_upload_single(request, file_type, file_id, file_name):
+    rsp = {'message': 'operation success', 'status_code': 200}
     sfile = request.FILES.get(file_name)
     if file_type == 'tf':
         try:
@@ -128,7 +147,8 @@ def api_upload_single(request, file_type, file_id, file_name):
             setattr(tf, file_name, sfile)
             tf.save()
         except:
-            pass
+            rsp['message'] = 'operation failed'
+            rsp['status_code'] = 400
     if file_type == 'gf':
         try:
             thesis = file_id.split('-')[0]
@@ -138,5 +158,6 @@ def api_upload_single(request, file_type, file_id, file_name):
             setattr(gf, file_name, sfile)
             gf.save()
         except:
-            pass
-    return HttpResponse('single upload done')
+            rsp['message'] = 'operation failed'
+            rsp['status_code'] = 400
+    return JsonResponse(rsp, safe=False)

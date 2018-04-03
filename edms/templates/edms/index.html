@@ -116,6 +116,14 @@
           {% include './pages/my_students.html' %}
         </div>
         <input type="file" ref="upload" style="display:none">
+        <div>
+          <!-- <mu-raised-button label="dialog" @click="open"></mu-raised-button> -->
+          <mu-dialog :open="dialog" title="确认上传文件" @close="close">
+            <p ref='upload_path'></p>
+            <mu-flat-button slot="actions" @click="close" primary label="取消"></mu-flat-button>
+            <mu-flat-button slot="actions" primary @click="upload_single()" label="确认上传"></mu-flat-button>
+          </mu-dialog>
+        </div>
       </main>
     </div>
     <a v-if="tf_index!==-1||gf_index!==-1" href="/edms/" id="bt_back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">返回上一级</a>
