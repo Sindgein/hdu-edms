@@ -3,7 +3,7 @@ var app = new Vue({
   el: '#app',
   data: {
     header_title: '教学档案列表',
-    teach_files: [],
+    teach_files: [],//
     teach_file: null,
     tf_index: -1,
     gradesign_files: [],
@@ -18,21 +18,7 @@ var app = new Vue({
     course_name: '',
     course_id: '',
     teaching_syllabus: null,
-    file_names: [
-      'teaching_syllabus',
-      'teaching_plan',
-      'student_score',
-      'teaching_sum_up',
-      'exam_paper',
-      'exam_paper_answer',
-      'exam_paper_analyze',
-      'exam_part',
-      'exam_make_up',
-      'exam_make_up_answer',
-      'exam_make_up_part'
-    ],
     form_files: []
-
   },
   methods: {
     change_header_title(title, page_index) {
@@ -55,28 +41,6 @@ var app = new Vue({
     new_file(new_type) {
       this.new_type = new_type;
     },
-    submit_teach_file() {
-      var data = new FormData()
-      data.append('teachers', this.teachers)
-      data.append('year', this.year)
-      data.append('term', this.term)
-      data.append('course_name', this.course_name)
-      data.append('course_id', this.course_id)
-      for (i in this.form_files) {
-        if (this.form_files[i].files > 0) {
-          var teach_file = this.form_files[i].files[0]
-          data.append(this.file_names[i], teach_file)
-        }
-      }
-      $.ajax({
-        url: '/edms/api/create_teach_file/',
-        type: 'POST',
-        data: data,
-        cache: false,
-        processData: false,
-        contentType: false
-      });
-    }
   },
   mounted: function () {
     this.$nextTick(function () {
@@ -85,9 +49,6 @@ var app = new Vue({
       $.get('/edms/api/get_gradesign_file_list/',
         (data) => this.gradesign_files = data);
     })
-
-
-
   },
   watch: {
     tf_index: function () {
@@ -104,28 +65,55 @@ var app = new Vue({
           this.gradesign_file = data;
         })
     },
-    page_index: function () {
-
-      console.log('form files ready');
-      setTimeout(
-        () => {
-        this.form_files = [
-          this.$refs.teaching_syllabus,
-          this.$refs.teaching_plan,
-          this.$refs.student_score,
-          this.$refs.teaching_sum_up,
-          this.$refs.exam_paper,
-          this.$refs.exam_paper_answer,
-          this.$refs.exam_paper_analyze,
-          this.$refs.exam_part,
-          this.$refs.exam_make_up,
-          this.$refs.exam_make_up_answer,
-          this.$refs.exam_make_up_part
-        ]
-        }, 1000)
-    }
-
   }
-
-
 })
+
+
+function submit_teach_file() {
+  var data = new FormData()
+  data.append('teachers', app.teachers)
+  data.append('year', app.year)
+  data.append('term', app.term)
+  data.append('course_name', app.course_name)
+  data.append('course_id', app.course_id)
+  var file_names = [
+    'teaching_syllabus',
+    'teaching_plan',
+    'student_score',
+    'teaching_sum_up',
+    'exam_paper',
+    'exam_paper_answer',
+    'exam_paper_analyze',
+    'exam_part',
+    'exam_make_up',
+    'exam_make_up_answer',
+    'exam_make_up_part'
+  ]
+  var form_files = [
+    app.$refs.teaching_syllabus,
+    app.$refs.teaching_plan,
+    app.$refs.student_score,
+    app.$refs.teaching_sum_up,
+    app.$refs.exam_paper,
+    app.$refs.exam_paper_answer,
+    app.$refs.exam_paper_analyze,
+    app.$refs.exam_part,
+    app.$refs.exam_make_up,
+    app.$refs.exam_make_up_answer,
+    app.$refs.exam_make_up_part
+  ]
+  for (i in file_names) {
+    if (form_files[i].files.length > 0) {
+      var teach_file = app.$refs[file_names[i]].files[0]
+      data.append(file_names[i], teach_file)
+    }
+  }
+  $.ajax({
+    url: '/edms/api/create_teach_file/',
+    type: 'POST',
+    data: data,
+    cache: false,
+    processData: false,
+    contentType: false
+  });
+}
