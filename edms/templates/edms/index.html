@@ -53,12 +53,10 @@
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
           <!-- <img src="/static/images/user.jpg" class="demo-avatar"> -->
-          <span v-model="teachers">{{ user_name }}</span>
+          <span>{{ user_name }}</span>
           <span>{{ user_id }}</span>
           <span>{{ user_id }}</span>
           <div class="demo-avatar-dropdown">
-
-
             <div class="mdl-layout-spacer"></div>
             <!-- <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
               <i class="material-icons" role="presentation">arrow_drop_down</i>
@@ -112,9 +110,12 @@
           {% include './pages/new_gradesign_file.html' %}
         </div>
         <div v-if="page_index===3&&new_type===3" class="mdl-grid demo-content">
-          <!-- {% include './pages/new_student_info.html' %} -->
-          <new-teach-file></new-teach-file>
+          {% include './pages/new_student_info.html' %}
         </div>
+        <div v-if="page_index===4" class="mdl-grid demo-content">
+          {% include './pages/my_students.html' %}
+        </div>
+        <input type="file" ref="upload" style="display:none">
       </main>
     </div>
     <a v-if="tf_index!==-1||gf_index!==-1" href="/edms/" id="bt_back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">返回上一级</a>
@@ -125,7 +126,6 @@
   <script src="/static/js/muse-ui.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="/static/js/edms-main-app.js"></script>
-  <!-- <script src="/static/js/new-teach-file-app.js"></script> -->
 
 </body>
 <style>

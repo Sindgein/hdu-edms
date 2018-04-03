@@ -3,64 +3,64 @@
         <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
             <h2 class="mdl-card__title-text">毕业设计档案</h2>
         </div>
-        <mu-text-field label="毕设题目" label-float class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"></mu-text-field>
+        <mu-text-field v-model="gradesign_thesis" label="毕设题目" label-float class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"></mu-text-field>
         <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <!-- <p style="color:grey">学生</p> -->
-            <mu-text-field hint-text="学生" disabled full-width></mu-text-field>
+            <mu-text-field v-model="gradesign_students" label="学生" label-float disabled full-width></mu-text-field>
 
-            <mu-chip v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12,13]" style="margin:4px">
-                14062130 张豪
+            <mu-chip v-for="i in students" @click="add_student(i.student_id+'-'+i.student_name)" style="margin:4px">
+                [[ i.student_id ]]-[[ i.student_name ]]
             </mu-chip>
         </div>
         <div class="mdl-grid demo-content">
             <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <span>任务书</span>
-                <input type="file">
+                <input ref='task' type="file">
                 </input>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <span>外文翻译</span>
-                <input type="file">
+                <input ref='translation' type="file">
                 </input>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <span>文献综述</span>
-                <input type="file">
+                <input ref='summary' type="file">
                 </input>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <span>开题报告</span>
-                <input type="file">
+                <input ref='begin_report' type="file">
                 </input>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <span>毕业论文</span>
-                <input type="file">
+                <input ref='paper' type="file">
                 </input>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <span>考核表</span>
-                <input type="file">
+                <input ref='check_table' type="file">
                 </input>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <span>指导记录</span>
-                <input type="file">
+                <input ref='task_record' type="file">
                 </input>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <span>毕业设计附件</span>
-                <input type="file">
+                <input ref='addition' type="file">
                 </input>
             </div>
             <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <span>实习手册</span>
-                <input type="file">
+                <input ref='project_training' type="file">
                 </input>
             </div>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-            <a @click="new_file(1)" class="mdl-button mdl-js-button mdl-js-ripple-effect">点击创建</a>
+            <a @click="submit_gradesign_file()" class="mdl-button mdl-js-button mdl-js-ripple-effect">点击创建</a>
         </div>
     </div>
 </div>

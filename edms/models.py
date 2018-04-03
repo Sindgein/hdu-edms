@@ -83,9 +83,11 @@ class TeachFiles(models.Model):
             item = getattr(self, f)
             if item:
                 detail[f] = {'url': item.url, 'filename': fc,
+                             'filename_en': f,
                              'mtime': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(item.path)))}
             else:
-                detail[f] = {'url': 'null', 'filename': fc + ' [未上传]'}
+                detail[f] = {'url': 'null', 'filename_en': f,
+                             'filename': fc + ' [未上传]'}
         return detail
 
 
@@ -98,23 +100,23 @@ class GraDesFiles(models.Model):
     student_id = models.CharField(max_length=100, blank=True)
     # 毕设资料清单,需要上传的文件
     task = models.FileField(
-        verbose_name='任务书', upload_to='uploads/GraDesFiles/task', blank=True)
+        verbose_name='任务书', upload_to='uploads/GraDesFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     translation = models.FileField(
-        verbose_name='外文翻译(附原文)', upload_to='uploads/GraDesFiles/translation', blank=True)
+        verbose_name='外文翻译(附原文)', upload_to='uploads/GraDesFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     summary = models.FileField(
-        verbose_name='文献综述', upload_to='uploads/GraDesFiles/summary', blank=True)
+        verbose_name='文献综述', upload_to='uploads/GraDesFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     begin_report = models.FileField(
-        verbose_name='开题报告', upload_to='uploads/GraDesFiles/begin_report', blank=True)
+        verbose_name='开题报告', upload_to='uploads/GraDesFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     paper = models.FileField(verbose_name='毕业设计(论文)',
-                             upload_to='uploads/GraDesFiles/paper', blank=True)
+                             upload_to='uploads/GraDesFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     check_table = models.FileField(
-        verbose_name='考核表', upload_to='uploads/GraDesFiles/check_table', blank=True)
+        verbose_name='考核表', upload_to='uploads/GraDesFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     task_record = models.FileField(
-        verbose_name='指导记录', upload_to='uploads/GraDesFiles/task_record', blank=True)
+        verbose_name='指导记录', upload_to='uploads/GraDesFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     addition = models.FileField(
-        verbose_name='附件(设计图纸，软件等)', upload_to='uploads/GraDesFiles/addition', blank=True)
+        verbose_name='附件(设计图纸，软件等)', upload_to='uploads/GraDesFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
     project_training = models.FileField(
-        verbose_name='实习手册', upload_to='uploads/GraDesFiles/project_training', blank=True)
+        verbose_name='实习手册', upload_to='uploads/GraDesFiles/%Y/%m/%d', storage=FileStorage(), blank=True)
 
     # 审核意见
     auditing_opinion = models.TextField(verbose_name='审核意见', blank=True)
@@ -134,7 +136,8 @@ class GraDesFiles(models.Model):
             students = ''
             for i in self.student_id.split(" "):
                 # '姓名 '
-                students += User.objects.get(username=i).student.name + ' '
+                if i:
+                    students += User.objects.get(username=i).student.name + ' '
             return students
         else:
             return '暂无学生选择此课题'
@@ -154,8 +157,10 @@ class GraDesFiles(models.Model):
                 detail[f] = {
                     'url': item.url,
                     'filename': fc,
+                    'filename_en': f,
                     'mtime': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(item.path)))
                 }
             else:
-                detail[f] = {'url': 'null', 'filename': fc + ' [未上传]'}
+                detail[f] = {'url': 'null', 'filename_en': f,
+                             'filename': fc + ' [未上传]'}
         return detail

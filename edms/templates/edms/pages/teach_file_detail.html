@@ -4,12 +4,12 @@
             <h2 class="mdl-card__title-text">[[ i.filename ]]</h2>
         </div>
         <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-            最后上传时间：[[i.mtime]]<br>
-            审核意见：
+            最后上传时间：[[i.mtime]]
+            <br> 审核意见：
         </div>
         <div class="mdl-card__actions mdl-card--border">
             <a class="mdl-button mdl-js-button mdl-js-ripple-effect">下载</a>
-            <a class="mdl-button mdl-js-button mdl-js-ripple-effect">上传</a>
+            <a @click="upload_trigger(1,teach_files[tf_index].course_id,i.filename_en)" class="mdl-button mdl-js-button mdl-js-ripple-effect">上传</a>
         </div>
 
     </div>
