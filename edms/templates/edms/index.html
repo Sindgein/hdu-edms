@@ -121,7 +121,7 @@
           <mu-dialog :open="dialog" title="确认上传文件" @close="close">
             <p ref='upload_path'></p>
             <mu-flat-button slot="actions" @click="close" primary label="取消"></mu-flat-button>
-            <mu-flat-button slot="actions" primary @click="upload_single()" label="确认上传"></mu-flat-button>
+            <mu-flat-button slot="actions" primary @click="method.uploadSingleExcute(app,singleUploadCache)" label="确认上传"></mu-flat-button>
           </mu-dialog>
         </div>
       </main>

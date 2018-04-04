@@ -78,7 +78,7 @@ def api_create_teach_file(request):
         teachfile = TeachFiles(teacher=request.user.teacher)
         for i in FILES:
             try:
-                setattr(teachfile, i, files.get(i))
+                teachfile.upload_file(i, files.get(i))
             except AttributeError:
                 pass
         for i in data:
@@ -91,7 +91,7 @@ def api_create_teach_file(request):
     except:
         rsp['message'] = 'operation failed'
         rsp['status_code'] = 400
-        
+
     return JsonResponse(rsp, safe=False)
 
 
@@ -144,7 +144,7 @@ def api_upload_single(request, file_type, file_id, file_name):
     if file_type == 'tf':
         try:
             tf = TeachFiles.objects.get(course_id=file_id)
-            setattr(tf, file_name, sfile)
+            tf.upload_file(file_name, sfile)
             tf.save()
         except:
             rsp['message'] = 'operation failed'
@@ -155,7 +155,7 @@ def api_upload_single(request, file_type, file_id, file_name):
             student_id = file_id.split('-')[1]
             gf = GraDesFiles.objects.get(
                 graduation_thesis=thesis, student_id=student_id)
-            setattr(gf, file_name, sfile)
+            gf.upload_file(file_name, sfile)
             gf.save()
         except:
             rsp['message'] = 'operation failed'

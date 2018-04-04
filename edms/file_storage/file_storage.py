@@ -1,4 +1,5 @@
 from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 
 class FileStorage(FileSystemStorage):
@@ -21,6 +22,7 @@ class FileStorage(FileSystemStorage):
         # 定义文件名，年月日时分秒随机数
         fn = time.strftime('%Y%m%d%H%M%S')
         fn = fn + '_%d' % random.randint(0, 100)
+        fn = fn + '%s' % settings.SECRET_KEY[random.randint(0, 50)]
         # 重写合成文件名
         name = os.path.join(d, fn + ext)
         # 调用父类方法
