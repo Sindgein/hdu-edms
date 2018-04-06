@@ -19,20 +19,6 @@ def edms(request):
     return render(request, 'edms/index.html', context=content)
 
 
-def file_download(request):
-    # do something...
-    a = MyModel.objects.all()[2]
-    paths = a.upload.url
-
-    with open(paths, 'rb') as f:
-        c = f.read()
-
-    response = HttpResponse(c)
-    response['Content-Type'] = 'application/octet-stream'
-    response['Content-Disposition'] = 'attachment;filename="test.xlsx"'
-    return response
-
-
 def api_get_teach_file_list(request):
     teacher = request.user.teacher
     file_set = teacher.course.all()
@@ -161,3 +147,19 @@ def api_upload_single(request, file_type, file_id, file_name):
             rsp['message'] = 'operation failed'
             rsp['status_code'] = 400
     return JsonResponse(rsp, safe=False)
+
+
+def file_download(request, file_url, file_name):
+    # do something...
+    file_url = '/'.join(file_url.split('-'))
+    # print(file_url)
+    print(file_name)
+    with open(file_url, 'rb') as f:
+        c = f.read()
+    response = HttpResponse(c)
+    file_name = '%d.docx' % random.randint(0, 100)
+    # file_name = bytes(file_name, encoding="gbk")
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(
+        file_name)
+    return response

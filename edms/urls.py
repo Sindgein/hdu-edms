@@ -15,5 +15,6 @@ urlpatterns = [
     path('api/create_gradesign_file/', views.api_create_gradesign_file),
     path('api/create_student/', views.api_creat_student),
     path('api/single_upload/<file_type>/<file_id>/<file_name>/',
-         views.api_upload_single)
+         views.api_upload_single),
+    path('api/file_download/<file_url>/<file_name>/', views.file_download)
 ]

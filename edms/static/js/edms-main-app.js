@@ -58,6 +58,10 @@ var api = {
       processData: false,
       contentType: false,
     });
+  },
+  downloadFile: function (file_url, filename) {
+    file_url = file_url.split('/').join('-');
+    $.get("/edms/api/file_download/" + file_url + '/' + filename + '/')
   }
 }
 
@@ -216,6 +220,23 @@ var method = {
       setTimeout(() => api.getGradesginFileDetail(vm), 1000)
     cache.clear()
   },
+  downloadFile: function (file_url, filename) {
+    if (file_url !== 'null') {
+      file_url = file_url.split('/').join('-');
+      var url = "/edms/api/file_download/" + file_url + '/' + filename + '/';
+      window.open(url)
+    }
+    else
+      alert('该文件未上传')
+
+    // var a = document.createElement('a');
+
+    // a.href = url;
+    // a.download = filename + '.docx';
+    // a.click();             
+
+
+  }
 }
 
 

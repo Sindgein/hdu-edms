@@ -91,7 +91,7 @@ class TeachFiles(models.Model):
         for f, fc in zip(FILES, FILES_CN):
             item = getattr(self, f)
             if item:
-                detail[f] = {'url': item.url, 'filename': fc,
+                detail[f] = {'url': item.path, 'filename': fc,
                              'filename_en': f,
                              'mtime': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(item.path)))}
             else:
@@ -172,7 +172,7 @@ class GraDesFiles(models.Model):
             item = getattr(self, f)
             if item:
                 detail[f] = {
-                    'url': item.url,
+                    'url': item.path,
                     'filename': fc,
                     'filename_en': f,
                     'mtime': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(item.path)))
