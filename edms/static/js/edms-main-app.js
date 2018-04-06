@@ -126,6 +126,13 @@ var method = {
       }
     }
     api.createFile('tf', data);
+    vm.show_progress = true;
+    setTimeout(() => {
+      vm.page_index = 1;
+      vm.tf_index = -1;
+      vm.show_progress = false;
+      api.getTeachFileList(vm);
+    }, 1500)
   },
   submitGradesignFile: function (vm) {
     var data = new FormData()
@@ -158,7 +165,14 @@ var method = {
         data.append(file_names[i], gradesign_file)
       }
     }
-    api.createFile('gf', data)
+    api.createFile('gf', data);
+    vm.show_progress = true;
+    setTimeout(() => {
+      vm.page_index = 2;
+      vm.gf_index = -1;
+      vm.show_progress = false;
+      api.getGradesignList(vm);
+    }, 1500)
   },
   submitStudentInfo: function (vm) {
     var data = new FormData()
@@ -167,7 +181,13 @@ var method = {
     data.append('_class', vm.student_class)
     data.append('major', vm.major)
     data.append('school', vm.school)
-    api.createStudent(data)
+    api.createStudent(data);
+    vm.show_progress = true;
+    setTimeout(() => {
+      vm.page_index = 4;
+      vm.show_progress = false;
+      api.getStudentList(vm);
+    }, 1500)
   },
   uploadSingleConfirm: function (vm, file_type, file_id, file_name, student_id) {
     var file_input = vm.$refs.upload;
@@ -195,8 +215,7 @@ var method = {
     if (cache.file_type === 2)
       setTimeout(() => api.getGradesginFileDetail(vm), 1000)
     cache.clear()
-  }
-
+  },
 }
 
 
@@ -206,6 +225,7 @@ var app = new Vue({
   el: '#app',
   data: {
     dialog: false,
+    show_progress: false,
     header_title: '教学档案列表',
     teach_files: [],//教学档案列表
     teach_file: null,

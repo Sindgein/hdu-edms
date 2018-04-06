@@ -3,6 +3,7 @@
         <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
             <h2 class="mdl-card__title-text">毕业设计档案</h2>
         </div>
+        <mu-linear-progress v-if="show_progress"></mu-linear-progress>
         <mu-text-field v-model="gradesign_thesis" label="毕设题目" label-float class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"></mu-text-field>
         <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <!-- <p style="color:grey">学生</p> -->

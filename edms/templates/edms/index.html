@@ -55,7 +55,6 @@
           <!-- <img src="/static/images/user.jpg" class="demo-avatar"> -->
           <span>{{ user_name }}</span>
           <span>{{ user_id }}</span>
-          <span>{{ user_id }}</span>
           <div class="demo-avatar-dropdown">
             <div class="mdl-layout-spacer"></div>
             <!-- <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
@@ -123,6 +122,7 @@
             <mu-flat-button slot="actions" @click="close" primary label="取消"></mu-flat-button>
             <mu-flat-button slot="actions" primary @click="method.uploadSingleExcute(app,singleUploadCache)" label="确认上传"></mu-flat-button>
           </mu-dialog>
+          <!-- <mu-circular-progress :size="90" ></mu-linear-progress> -->
         </div>
       </main>
     </div>
