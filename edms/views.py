@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from .utils import FILES, GRADESIN
 import json
+import urllib
 # Create your views here.
 
 
@@ -152,14 +153,11 @@ def api_upload_single(request, file_type, file_id, file_name):
 def file_download(request, file_url, file_name):
     # do something...
     file_url = '/'.join(file_url.split('-'))
-    # print(file_url)
-    print(file_name)
     with open(file_url, 'rb') as f:
         c = f.read()
     response = HttpResponse(c)
-    file_name = '%d.docx' % random.randint(0, 100)
-    # file_name = bytes(file_name, encoding="gbk")
+    file_name += '.docx'
     response['Content-Type'] = 'application/octet-stream'
-    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(
-        file_name)
+    response['Content-Disposition'] = 'attachment; filename=' + \
+        file_name.encode('utf-8').decode('ISO-8859-1')
     return response
