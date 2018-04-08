@@ -91,12 +91,17 @@ class TeachFiles(models.Model):
         for f, fc in zip(FILES, FILES_CN):
             item = getattr(self, f)
             if item:
-                detail[f] = {'url': item.path, 'filename': fc,
-                             'filename_en': f,
-                             'mtime': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(item.path)))}
+                detail[f] = {
+                    'url': item.path,
+                    'filename': fc,
+                    'filename_en': f,
+                    'mtime': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(item.path)))}
             else:
-                detail[f] = {'url': 'null', 'filename_en': f,
-                             'filename': fc + ' [未上传]'}
+                detail[f] = {
+                    'url': 'null',
+                    'filename_en': f,
+                    'filename': fc,
+                    'mtime': '未上传'}
         return detail
 
 
@@ -178,6 +183,10 @@ class GraDesFiles(models.Model):
                     'mtime': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getmtime(item.path)))
                 }
             else:
-                detail[f] = {'url': 'null', 'filename_en': f,
-                             'filename': fc + ' [未上传]'}
+                detail[f] = {
+                    'url': 'null',
+                    'filename_en': f,
+                    'filename': fc,
+                    'mtime': '未上传'
+                }
         return detail

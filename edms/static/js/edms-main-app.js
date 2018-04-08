@@ -236,6 +236,18 @@ var method = {
     // a.click();             
 
 
+  },
+  onlineView: function (file_url, filename) {
+    if (file_url !== 'null') {
+      file_url = file_url.split('/').join('-');
+      var url = "http://111.231.142.27:5000/edms/api/file_download/" + file_url + '/' + filename + '/';
+      // var a = document.createElement(a)
+      window.open("http://ow365.cn/?i=15369&furl=" + url)
+      // a.target="_blank"
+      // a.click()
+    }
+    else
+      alert('该文件未上传')
   }
 }
 

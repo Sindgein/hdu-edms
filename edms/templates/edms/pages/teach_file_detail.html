@@ -8,6 +8,7 @@
             <br> 审核意见：
         </div>
         <div class="mdl-card__actions mdl-card--border">
+            <a @click="method.onlineView(i.url,i.filename)" class="mdl-button mdl-js-button mdl-js-ripple-effect">预览</a>
             <a @click="method.downloadFile(i.url,i.filename)" class="mdl-button mdl-js-button mdl-js-ripple-effect">下载</a>
             <a @click="method.uploadSingleConfirm(app,1,teach_files[tf_index].course_id,i.filename_en)" class="mdl-button mdl-js-button mdl-js-ripple-effect">上传</a>
         </div>
